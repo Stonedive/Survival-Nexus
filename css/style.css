@@ -318,12 +318,11 @@ summary::-webkit-details-marker{display:none}
 /* ============== Footer ============== */
 .site-footer{
   border-top:1px solid var(--line);padding:2rem 1rem;text-align:center;color:var(--text-dim)
-  .ai-note{
+}
+.ai-note{
   margin-top: .5rem;
   font-size: .8rem;
   color: var(--text-dim);
-}
-
 }
 .site-footer a{color:var(--text-dim)}
 /* reset bullets in footer navs */
