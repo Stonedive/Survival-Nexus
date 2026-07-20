@@ -4,12 +4,44 @@
 ============================ */
 
 document.addEventListener("DOMContentLoaded", () => {
+  initThemeToggle();
   initNavToggle();
   injectFooter();
   setCurrentYear();
   highlightActiveNav();
   guideMetaBootstrap();
 });
+
+/* ----- THEME TOGGLE ----- */
+function initThemeToggle() {
+  const html = document.documentElement;
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  html.setAttribute('data-theme', savedTheme);
+
+  // Create toggle button
+  const toggle = document.createElement('button');
+  toggle.className = 'theme-toggle';
+  toggle.setAttribute('aria-label', 'Toggle dark/light theme');
+  toggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+  toggle.addEventListener('click', () => {
+    const current = html.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    toggle.textContent = next === 'dark' ? '☀️' : '🌙';
+  });
+
+  // Inject into navbar (after logo, before nav-toggle)
+  const navbar = document.querySelector('.navbar');
+  if (navbar) {
+    const navToggle = navbar.querySelector('.nav-toggle');
+    if (navToggle) {
+      navbar.insertBefore(toggle, navToggle);
+    } else {
+      navbar.appendChild(toggle);
+    }
+  }
+}
 
 /* ----- NAV TOGGLE ----- */
 function initNavToggle() {
